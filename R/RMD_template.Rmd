@@ -1,0 +1,72 @@
+---
+title: "Title"
+author: "Your Name"
+date: "`r format(Sys.time(), '%B %d, %Y')`" # Update date every time it is knit
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.align = "center", # Set default figure options
+  fig.width = 8,
+  fig.height = 4
+)
+
+
+library(ggplot2) # Plotting
+library(dplyr)   # Only needed for the example plots below
+library(ggpubr)  # Publication ready plot themes
+
+# Set random number seed
+set.seed(42)
+
+
+# Set discrete default colors to Wong B (https://doi.org/10.1038/nmeth.1618)
+# colorblindness friendly colors and default continuous colors to the viridis
+# color map
+custom_colors <- c(
+  "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7",
+  "#666666", "#AD7700", "#1C91D4", "#007756", "#D5C711", "#005685", "#A04700",
+  "#B14380", "#4D4D4D", "#FFBE2D", "#80C7EF", "#00F6B3", "#F4EB71", "#06A5FF",
+  "#FF8320", "#D99BBD", "#8C8C8C", "#FFCB57", "#9AD2F2", "#2CFFC6", "#F6EF8E",
+  "#38B7FF", "#FF9B4D", "#E0AFCA", "#A3A3A3", "#8A5F00", "#1674A9", "#005F45",
+  "#AA9F0D", "#00446B", "#803800", "#8D3666", "#3D3D3D"
+)
+options(
+  ggplot2.discrete.colour = list(custom_colors),
+  ggplot2.discrete.fill = list(custom_colors),
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+# Set default ggplot2 theme options
+theme_set(
+  theme_pubr(
+    base_size = 12,  # Font size
+    legend = "right" # Legend position
+  ) +
+    theme(plot.title = element_text(hjust = 0.5)) # Center plot titles
+)
+```
+
+
+```{r example_plot}
+mpg <- filter(mpg, manufacturer %in% c(
+  "ford", "honda", "dodge", "toyota",
+  "nissan", "pontiac", "subaru"
+))
+mpg |>
+  ggplot(aes(y = hwy, x = manufacturer, fill = manufacturer)) +
+  geom_violin() +
+  geom_boxplot(width = .1, fill = "white") +
+  labs(title = "Highway MPG")
+```
+
+```{r example_plot_2}
+mpg |>
+  ggplot(aes(y = cty, x = hwy, color = hwy)) +
+  geom_point(size = 2) +
+  labs(title = "Correlation of City and Highway Milage")
+```
