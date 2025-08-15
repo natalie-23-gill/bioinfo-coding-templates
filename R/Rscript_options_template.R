@@ -36,9 +36,7 @@ library(ggplot2) # Plotting
 library(ggpubr)  # Publication ready plot themes
 set.seed(42)
 
-output <- paste0(
-  ""
-)
+output <- opt$output
 
 # Create the results folders
 if (!(dir.exists(output))) {
@@ -143,5 +141,5 @@ multipage_plot <- function(plot_list,
 # Write out the session info for reproducibility
 writeLines(
   capture.output(sessionInfo()),
-  file.path(output, "sessionInfo.txt")
+  file.path(opt$output, "sessionInfo.txt")
 )

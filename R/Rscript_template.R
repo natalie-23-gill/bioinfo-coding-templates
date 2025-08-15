@@ -49,6 +49,19 @@ theme_set(
   ) +
     theme(plot.title = element_text(hjust = 0.5)) # Center plot titles
 )
+
+# Note: Add grid lines as needed
+# theme(panel.grid.major = element_line(
+#    linetype = "dotted",
+#    color = "grey50",
+#    linewidth = .6
+#  ),
+#  panel.grid.minor = element_line(
+#    linetype = "dotted",
+#    color = "grey50",
+#    linewidth = .3
+#  ))
+
 # Functions ---------------------------------------------------------------
 
 ## Custom functions needed to run the script

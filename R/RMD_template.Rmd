@@ -49,6 +49,17 @@ theme_set(
   ) +
     theme(plot.title = element_text(hjust = 0.5)) # Center plot titles
 )
+# Note: Add grid lines as needed
+# theme(panel.grid.major = element_line(
+#    linetype = "dotted",
+#    color = "grey50",
+#    linewidth = .6
+#  ),
+#  panel.grid.minor = element_line(
+#    linetype = "dotted",
+#    color = "grey50",
+#    linewidth = .3
+#  ))
 ```
 
 
@@ -68,5 +79,15 @@ mpg |>
 mpg |>
   ggplot(aes(y = cty, x = hwy, color = hwy)) +
   geom_point(size = 2) +
-  labs(title = "Correlation of City and Highway Milage")
+  labs(title = "Correlation of City and Highway Milage") +
+  theme(panel.grid.major = element_line(
+     linetype = "dotted",
+     color = "grey50",
+     linewidth = .6
+   ),
+   panel.grid.minor = element_line(
+     linetype = "dotted",
+     color = "grey50",
+     linewidth = .3
+   ))
 ```
